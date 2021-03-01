@@ -5,8 +5,8 @@ import {View, Header} from './components';
 function App() {
   return (
     <>
-      <View/>
       <Header/>
+      <View/>
     </>
   )
 }

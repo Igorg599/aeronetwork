@@ -1,10 +1,9 @@
 import React from 'react'
-// import { Engine, Scene } from 'react-babylonjs'
-// import { Vector3 } from '@babylonjs/core';
+// import {useDispatch} from 'react-redux';
 
 const Header = () => (
-  <div>
-    222222
+  <div className="header">
+    <button type="button">Загрузить схему</button>
   </div>
 )
 
