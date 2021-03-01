@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-
 export const fetchData = () => (dispatch)  => {
-    axios.get('/src/db.json').then (({data}) => {
+    axios.get('/public/data.json/data').then (({data}) => {
         dispatch(setData(data));
     });
 };

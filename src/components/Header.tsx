@@ -1,10 +1,17 @@
-import React from 'react'
-// import {useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux'
+import {fetchData} from '../redux/action/index';
 
-const Header = () => (
-  <div className="header">
-    <button type="button">Загрузить схему</button>
+const Header = () => {
+  const dispatch = useDispatch();
+  const onSetData = () => {
+    dispatch(fetchData());
+  }
+  
+  return (
+    <div className="header">
+    <button type="button" onClick={() => onSetData()}>Загрузить схему</button>
   </div>
-)
+  )
+}
 
 export default Header

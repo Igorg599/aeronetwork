@@ -1,11 +1,15 @@
 import React from 'react'
-// import { Engine, Scene } from 'react-babylonjs'
-// import { Vector3 } from '@babylonjs/core';
+import {useSelector} from 'react-redux';
+// import { Scene } from 'react-babylonjs';
 
-const View = () => (
-  <div>
-    1111111
-  </div>
-)
+const View = () => {
+  const items = useSelector((data: any) => data.items);
+  console.log(items)
+  return (
+    <div>
+      1
+    </div>
+  )
+}
 
 export default View
