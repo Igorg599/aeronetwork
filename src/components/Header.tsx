@@ -2,10 +2,10 @@ import React from 'react'
 // import { Engine, Scene } from 'react-babylonjs'
 // import { Vector3 } from '@babylonjs/core';
 
-const Scena = () => (
-  <div className="row">
-    1
+const Header = () => (
+  <div>
+    222222
   </div>
 )
 
-export default Scena
+export default Header

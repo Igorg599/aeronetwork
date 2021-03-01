@@ -1,9 +1,14 @@
 import React from 'react';
 
-import Scena from './Scene';
+import {View, Header} from './components';
 
 function App() {
-  return <Scena/>
+  return (
+    <>
+      <View/>
+      <Header/>
+    </>
+  )
 }
 
 export default App;
