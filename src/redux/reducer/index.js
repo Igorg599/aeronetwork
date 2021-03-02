@@ -12,7 +12,7 @@ const data = (state = initialState, action) => {
                 const newItem = item
                 const a = item.linkedNodes
                 a.forEach(item => {
-                    const tieArr = action.payload.nodes.filter(n => n.id === item)
+                    const tieArr = splitArr.filter(n => n.id === item)
                     tieArr.push(newItem)
                     readyArr.push(tieArr)
                 })
