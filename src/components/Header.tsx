@@ -9,7 +9,7 @@ const Header = () => {
   
   return (
     <div className="header">
-    <button type="button" onClick={() => onSetData()}>Загрузить схему</button>
+    <button type="button" onClick={() => onSetData()}>Загрузить схему шахты</button>
   </div>
   )
 }
