@@ -17,7 +17,7 @@ const View = () => {
         <Scene>
           <arcRotateCamera name="arc" target={ new Vector3(-60, 45, -40) }
                     alpha={-Math.PI / 2} beta={(0.5 + (Math.PI / 4))}
-                    radius={40} minZ={0.001} wheelPrecision={50}/>
+                    radius={36} minZ={0.001} wheelPrecision={50}/>
           <Skybox rootUrl={SkyboxScenes[Math.abs(0) % SkyboxScenes.length].texture} />
           <hemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />   
           {items && items.map((item: any, index: any) => (
