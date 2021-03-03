@@ -1,7 +1,7 @@
 import React from 'react'
 import {useSelector} from 'react-redux';
 import { Engine, Scene, Skybox } from 'react-babylonjs'
-import { Vector3 } from '@babylonjs/core';
+import { Vector3, Quaternion, Color3 } from '@babylonjs/core';
 
 const SkyboxScenes: {
   name: string;
@@ -12,7 +12,7 @@ const SkyboxScenes: {
 }]
 
 const View: () => JSX.Element = () => {
-  const items: any = useSelector((data: any) => data.items);
+  const items: any = useSelector((data: any) => data.items)
   return (
     <div>
       <Engine antialias={true} width={500} height={500} adaptToDeviceRatio={true} canvasId="sample-canvas">
@@ -25,6 +25,11 @@ const View: () => JSX.Element = () => {
           {items && items.map((item: any, index: any) => (
             <lines key={index} name='lines' points={[new Vector3(item[1].point.x, item[1].point.y, item[1].point.z), new Vector3(item[0].point.x, item[0].point.y, item[0].point.z)]}/>
           ))}
+          {items && items.map((item: any, index: any) => (
+            <box key={index} name='box' id='11' width={0.1} depth={0.1} height={Vector3.Distance(new Vector3(item[1].point.x, item[1].point.y, item[1].point.z), new Vector3(item[0].point.x, item[0].point.y, item[0].point.z))}  rotationQuaternion={Quaternion.RotationAxis(Vector3.Cross(new Vector3(item[0].point.x, item[0].point.y, item[0].point.z).subtract(new Vector3(item[1].point.x, item[1].point.y, item[1].point.z)).normalize(), new Vector3(0, 1, 0)).normalize(), -Math.PI / 2 + Vector3.Dot(new Vector3(item[0].point.x, item[0].point.y, item[0].point.z).subtract(new Vector3(item[1].point.x, item[1].point.y, item[1].point.z)).normalize(), new Vector3(0, 1, 0)))} position={new Vector3((item[0].point.x + item[1].point.x)/2, (item[0].point.y + item[1].point.y)/2, (item[0].point.z + item[1].point.z)/2)}>
+              <standardMaterial name='groundMat' specularColor={Color3.Green()} diffuseColor={Color3.Yellow()}/>
+            </box>
+          ))}
         </Scene>
       </Engine>
     </div>
@@ -32,3 +37,6 @@ const View: () => JSX.Element = () => {
 }
 
 export default View
+
+
+// rotationQuaternion={Quaternion.RotationAxis(Vector3.Cross(new Vector3(item[0].point.x, item[0].point.y, item[0].point.z).subtract(new Vector3(item[1].point.x, item[1].point.y, item[1].point.z)).normalize(), new Vector3(0, 1, 0)).normalize(), -Math.PI / 2 + Vector3.Dot(new Vector3(item[0].point.x, item[0].point.y, item[0].point.z).subtract(new Vector3(item[1].point.x, item[1].point.y, item[1].point.z)).normalize(), new Vector3(0, 1, 0)))}

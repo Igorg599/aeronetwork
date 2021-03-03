@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {fetchData} from '../redux/action/index'
 import styled from 'styled-components'
 
@@ -8,9 +8,16 @@ const Nav = styled.div`
   height: 64px;
   background-color: rgb(236, 226, 236);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border-bottom: 3px solid rgb(211, 188, 224);
+  padding: 5px;
+  h1 {
+    font-size: 18px;
+    line-height: 18px;
+    margin: 0;
+  }
 `
 const Button = styled.button`
   text-decoration: none;
@@ -36,6 +43,7 @@ const Button = styled.button`
 
 const Header: () => JSX.Element = () => {
   const dispatch = useDispatch();
+  const title: any = useSelector((data: any) => data.title);
   const onSetData: () => void = () => {
     dispatch(fetchData());
   }
@@ -43,6 +51,7 @@ const Header: () => JSX.Element = () => {
   return (
     <Nav>
       <Button type="button" onClick={() => onSetData()}>Загрузить схему шахты</Button>
+      <h1>{title && title}</h1>
     </Nav>
   )
 }

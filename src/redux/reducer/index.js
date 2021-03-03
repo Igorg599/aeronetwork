@@ -1,6 +1,7 @@
   
 const initialState = {
-    items: null
+    items: null,
+    title: null
 };
 
 const data = (state = initialState, action) => {
@@ -19,7 +20,8 @@ const data = (state = initialState, action) => {
             })        
             return {
                 ...state,
-                items: readyArr
+                items: readyArr,
+                title: action.payload.title
             };
         
         default:
