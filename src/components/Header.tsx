@@ -54,12 +54,17 @@ const Header: () => JSX.Element = () => {
   }
 
   const onChange = (e: any) => {
-    const fileReader = new FileReader();
-    fileReader.readAsText(e.target.files[0], "UTF-8");
-    fileReader.onload = (e: any) => {
-      setFile({ file: JSON.parse(e.target.result) });
-    };
-  };
+    if (Object.keys(file).length !== 0) {
+      setFile({})
+    }
+    if (e.target.files[0]) {
+      const fileReader = new FileReader();
+      fileReader.readAsText(e.target.files[0], "UTF-8");
+      fileReader.onload = (e: any) => {
+        setFile({ file: JSON.parse(e.target.result) });
+      };
+    }
+  }
   
   return (
     <Nav>
