@@ -1,12 +1,4 @@
-import axios from 'axios';
-
-export const fetchData = () => (dispatch)  => {
-    axios.get('/public/data.json/data').then (({data}) => {
-        dispatch(setData(data));
-    });
-};
-
-export const setData = (items) => ({
+export const loadData = (file) => ({
     type: 'SET_DATA',
-    payload: items,
+    payload: file,
 });

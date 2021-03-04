@@ -1,5 +1,6 @@
+import React, {useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {fetchData} from '../redux/action/index'
+import {loadData} from '../redux/action/index'
 import styled from 'styled-components'
 
 const Nav = styled.div`
@@ -19,15 +20,15 @@ const Nav = styled.div`
     margin: 0;
   }
 `
-const Button = styled.button`
+const Loader = styled.input`
   text-decoration: none;
   height: 20px;
   display: flex;
   align-items: center;
   cursor: pointer;
   color: white;
-  padding: 15px 15px;
-  margin: 10px 20px;
+  padding: 5px 15px;
+  margin: 5px 20px;
   border-radius: 10px;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -36,6 +37,8 @@ const Button = styled.button`
   box-shadow: 0 0 20px rgba(0, 0, 0, .1);
   transition: .5s;
   outline: none;
+  font-size: 13px;
+  line-height: 13px;
   &:hover {
     background-position: right center;
   }
@@ -44,13 +47,23 @@ const Button = styled.button`
 const Header: () => JSX.Element = () => {
   const dispatch = useDispatch();
   const title: any = useSelector((data: any) => data.title);
-  const onSetData: () => void = () => {
-    dispatch(fetchData());
+  const [file, setFile] = useState({});
+
+  if (Object.keys(file).length !== 0) {
+    dispatch(loadData(file));
   }
+
+  const onChange = (e: any) => {
+    const fileReader = new FileReader();
+    fileReader.readAsText(e.target.files[0], "UTF-8");
+    fileReader.onload = (e: any) => {
+      setFile({ file: JSON.parse(e.target.result) });
+    };
+  };
   
   return (
     <Nav>
-      <Button type="button" onClick={() => onSetData()}>Загрузить схему шахты</Button>
+      <Loader type="file" onChange={onChange} accept=".json"/>
       <h1>{title && title}</h1>
     </Nav>
   )

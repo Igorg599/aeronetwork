@@ -8,7 +8,7 @@ const data = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_DATA':
             const readyArr = []
-            const splitArr = action.payload.nodes.map(item => Object.assign({}, item, { point: {x: item.point.x/100, y: item.point.y/100, z: item.point.z/10}}))
+            const splitArr = action.payload.file.nodes.map(item => Object.assign({}, item, { point: {x: item.point.x/100, y: item.point.y/100, z: item.point.z/10}}))
             splitArr.forEach(item => {
                 const newItem = item
                 const a = item.linkedNodes
@@ -21,7 +21,7 @@ const data = (state = initialState, action) => {
             return {
                 ...state,
                 items: readyArr,
-                title: action.payload.title
+                title: action.payload.file.title
             };
         
         default:
