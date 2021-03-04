@@ -17,13 +17,13 @@ const View: () => JSX.Element = () => {
     <div>
       <Engine antialias={true} width={500} height={500} adaptToDeviceRatio={true} canvasId="sample-canvas">
         <Scene>
-          <arcRotateCamera name="arc" target={ new Vector3(-60, 48, -40) }
+          <arcRotateCamera name="arc" target={ new Vector3(-60, -40, 48) }
                     alpha={-Math.PI / 2} beta={(0.5 + (Math.PI / 4))}
                     radius={38} minZ={0.001} wheelPrecision={50}/>
           <Skybox rootUrl={SkyboxScenes[Math.abs(0) % SkyboxScenes.length].texture} />
           <hemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />   
           {items && items.map((item: any, index: any) => (
-            <box key={index} name='box' id='11' width={0.1} depth={0.1} height={Vector3.Distance(new Vector3(item[1].point.x, item[1].point.y, item[1].point.z), new Vector3(item[0].point.x, item[0].point.y, item[0].point.z))}  rotationQuaternion={Quaternion.RotationAxis(Vector3.Cross(new Vector3(item[0].point.x, item[0].point.y, item[0].point.z).subtract(new Vector3(item[1].point.x, item[1].point.y, item[1].point.z)).normalize(), new Vector3(0, 1, 0)).normalize(), -Math.acos(Vector3.Dot(new Vector3(item[0].point.x, item[0].point.y, item[0].point.z).subtract(new Vector3(item[1].point.x, item[1].point.y, item[1].point.z)).normalize(), new Vector3(0, 1, 0))))} position={new Vector3((item[0].point.x + item[1].point.x)/2, (item[0].point.y + item[1].point.y)/2, (item[0].point.z + item[1].point.z)/2)}>
+            <box key={index} name='box' id='11' width={0.1} depth={0.1} height={Vector3.Distance(new Vector3(item[1].point.x, item[1].point.z, item[1].point.y), new Vector3(item[0].point.x, item[0].point.z, item[0].point.y))}  rotationQuaternion={Quaternion.RotationAxis(Vector3.Cross(new Vector3(item[0].point.x, item[0].point.z, item[0].point.y).subtract(new Vector3(item[1].point.x, item[1].point.z, item[1].point.y)).normalize(), new Vector3(0, 1, 0)).normalize(), -Math.acos(Vector3.Dot(new Vector3(item[0].point.x, item[0].point.z, item[0].point.y).subtract(new Vector3(item[1].point.x, item[1].point.z, item[1].point.y)).normalize(), new Vector3(0, 1, 0))))} position={new Vector3((item[0].point.x + item[1].point.x)/2, (item[0].point.z + item[1].point.z)/2, (item[0].point.y + item[1].point.y)/2)}>
               <standardMaterial name='groundMat' specularColor={Color3.Green()} diffuseColor={Color3.Yellow()}/>
             </box>
           ))}
