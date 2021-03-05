@@ -13,11 +13,14 @@ const SkyboxScenes: {
 
 const View: () => JSX.Element = () => {
   const items: any = useSelector((data: any) => data.items)
+  const positionX: any = useSelector((data: any) => data.positionX)
+  const positionY: any = useSelector((data: any) => data.positionY)
+  const positionZ: any = useSelector((data: any) => data.positionZ)
   return (
     <div>
       <Engine antialias={true} width={500} height={500} adaptToDeviceRatio={true} canvasId="sample-canvas">
         <Scene>
-          <arcRotateCamera name="arc" target={ new Vector3(-60, -40, 48) }
+          <arcRotateCamera name="arc" target={ new Vector3(positionX, positionZ, positionY) }
                     alpha={-Math.PI / 2} beta={(0.5 + (Math.PI / 4))}
                     radius={38} minZ={0.001} wheelPrecision={50}/>
           <Skybox rootUrl={SkyboxScenes[Math.abs(0) % SkyboxScenes.length].texture} />

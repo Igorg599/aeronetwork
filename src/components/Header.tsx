@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {loadData} from '../redux/action/index'
 import styled from 'styled-components'
@@ -47,21 +47,15 @@ const Loader = styled.input`
 const Header: () => JSX.Element = () => {
   const dispatch = useDispatch();
   const title: any = useSelector((data: any) => data.title);
-  const [file, setFile] = useState({});
-
-  if (Object.keys(file).length !== 0) {
-    dispatch(loadData(file));
-  }
 
   const onChange = (e: any) => {
-    if (Object.keys(file).length !== 0) {
-      setFile({})
-    }
     if (e.target.files[0]) {
       const fileReader = new FileReader();
       fileReader.readAsText(e.target.files[0], "UTF-8");
       fileReader.onload = (e: any) => {
-        setFile({ file: JSON.parse(e.target.result) });
+        if (Object.keys({ file: JSON.parse(e.target.result) }).length !== 0) {
+          dispatch(loadData({ file: JSON.parse(e.target.result) }));
+        }
       };
     }
   }

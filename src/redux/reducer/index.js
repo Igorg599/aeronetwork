@@ -1,7 +1,10 @@
   
 const initialState = {
     items: null,
-    title: null
+    title: null,
+    positionX: 0,
+    positionY: 0,
+    positionZ: 0
 };
 
 const data = (state = initialState, action) => {
@@ -17,11 +20,40 @@ const data = (state = initialState, action) => {
                     tieArr.push(newItem)
                     readyArr.push(tieArr)
                 })
-            })        
+            })   
+            let maxX = readyArr[0][0].point.x;
+            let minX = readyArr[0][0].point.x;
+            let maxY = readyArr[0][0].point.y;
+            let minY = readyArr[0][0].point.y;
+            let maxZ = readyArr[0][0].point.z;
+            let minZ = readyArr[0][0].point.z;
+            readyArr.forEach((item) => {
+                if (item[0].point.x > maxX) {
+                    maxX = item[0].point.x
+                }
+                if (item[0].point.x < minX) {
+                    minX = item[0].point.x
+                }
+                if (item[0].point.y > maxY) {
+                    maxY = item[0].point.y
+                }
+                if (item[0].point.y < minY) {
+                    minY = item[0].point.y
+                }
+                if (item[0].point.z > maxZ) {
+                    maxZ = item[0].point.z
+                }
+                if (item[0].point.z < minZ) {
+                    minZ = item[0].point.z
+                }
+            });     
             return {
                 ...state,
                 items: readyArr,
-                title: action.payload.file.title
+                title: action.payload.file.title,
+                positionX: (maxX + minX) / 2,
+                positionY: (maxY + minY) / 2,
+                positionZ: (maxZ + minZ) / 2
             };
         
         default:
@@ -30,3 +62,4 @@ const data = (state = initialState, action) => {
 };
 
 export default data;
+
